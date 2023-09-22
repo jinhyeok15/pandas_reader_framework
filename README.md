@@ -149,6 +149,7 @@ There is a bunch of steps to pre-processing DataFrame data structure
 
 - 2. Iteration
   - Replace value
+  - Filter rows
 
 3. fetch
 
