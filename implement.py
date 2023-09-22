@@ -1,4 +1,4 @@
-from model import Model, Field
+from pandas_reader.model import Model, Field
 
 
 def change_location_to_sido_code(location):
@@ -46,10 +46,13 @@ def change_status(status: str):
 
 class Major(Model):
     id = Field(index=True, auto_increment=True)
-    name = Field("학부_과(전공)명")
     univ = Field("학교명")
-    department = Field("단과대학명")
-    investigation_year = Field("조사년도")
     sido_code = Field("지역", change=change_location_to_sido_code)
+    name = Field("학부_과(전공)명")
+    department = Field("단과대학명")
+    std_lclsf_name = Field("표준분류대계열")
+    std_mclsf_name = Field("표준분류중계열")
+    std_sclsf_name = Field("표준분류소계열")
+    _specification = Field("대학구분", filter=lambda x: x == "대학")
+    investigation_year = Field("조사년도")
     status = Field("학과상태", change=change_status)
-    std_clsf_name = Field("표준분류대계열")

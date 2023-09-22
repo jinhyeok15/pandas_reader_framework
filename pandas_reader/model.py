@@ -29,12 +29,14 @@ class Field:
                  change=None,
                  index=False,
                  auto_increment=True,
-                 generator=None):
+                 generator=None,
+                 filter=None):
         self.target = target
         self.change = change
         self.index = index
         self.auto_increment = auto_increment
         self.generator = generator
+        self.filter = filter
 
 
 class ModelMeta:

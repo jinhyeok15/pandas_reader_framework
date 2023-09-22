@@ -1,9 +1,10 @@
+import os
 from typing import Optional
 import pandas as pd
 from pandas import RangeIndex
 
-from model import Model
-from config import FILNAME
+from pandas_reader.model import Model
+from pandas_reader.setup import config
 
 
 def _get_dataframe(filename: str, *,
@@ -23,14 +24,14 @@ def _get_dataframe(filename: str, *,
     - html
     ...
     """
-    relpath = "./"+source_path+"/"+filename
+    path = os.path.join(config.BASE_DIR, source_path, filename)
 
     if file_type == "csv":
         df = None
         try:
-            df = pd.read_csv(relpath)
+            df = pd.read_csv(path)
         except UnicodeDecodeError:
-            df = pd.read_csv(relpath, encoding=encoding)
+            df = pd.read_csv(path, encoding=encoding)
         
         return df
 
@@ -75,6 +76,20 @@ class Manager:
 
         if field.generator:
             self._df.index = [field.generator() for _ in range(len(self._df))]
+    
+    def _filter_rows(self) -> None:
+        dropped_index = []
+        filter_confs = []
+        for i, field in enumerate(self._fields):
+            if field.filter:
+                filter_confs.append((field.filter, self._colnames[i]))
+
+        for idx in self._df.index:
+            for filter, c in filter_confs:
+                if not filter(self._df[c][idx]):
+                    dropped_index.append(idx)
+                    break
+        self._df = self._df.drop(dropped_index)
 
     def get(self):
         return self._df
@@ -84,12 +99,13 @@ class Manager:
         return [
             self._remove_unmatched_column,
             self._replace_column_name,
+            self._set_index,
             self._replace_value,
-            self._set_index
+            self._filter_rows
         ]
 
 
-def fetch(model: Model, filename=FILNAME):
+def fetch(model: Model, filename=None):
     df = _get_dataframe(filename)
     manager = Manager(model, df)
     for step in manager.steps:

@@ -10,6 +10,7 @@ What I want to expect from this program is complying with scenario like below.
 1. Read file and convert to pandas.DataFrame.
 2. Changing column name that is used by domain or database.
 3. Changing value from the column.
+4. Filtering rows
 
 To approach this purpose, you don't need to know about the pandas api.
 You just need to declare Field in the Model class, and get the result by executing main.py.
@@ -25,7 +26,7 @@ Then, write the code on implement.py
 ### Import module
 
 ``` python
-from model import Model
+from pandas_reader.model import Model
 ```
 
 ### Use case
@@ -110,7 +111,8 @@ So you have to check Field constructor arguments.
 def change_value(target):
     write some codes
     ...
-change=change_value
+
+Field("Column1", change=change_value)
 ```
 
 - index: If index = True, auto_increment, generator is referenced. Default value is False.
@@ -121,8 +123,12 @@ change=change_value
 def random_generator():
     write some codes
     ...
-generator=random_generator
+
+Field("Column1", generator=random_generator)
 ```
+
+- filter: Use this argument if you want to get values only follow some condition.
+Filter is applied after the change function executed.
 
 ### Manager
 
@@ -135,10 +141,14 @@ the keyword argument of _get_dataframe function is allied to pandas.
 
 There is a bunch of steps to pre-processing DataFrame data structure
 
-1. Remove columns that is not matched
-2. Replace column name
-3. Replace value
-4. Add index if model has index_field
+- 1. Setup
+
+  - Remove columns that is not matched
+  - Replace column name
+  - Add index if model has index_field
+
+- 2. Iteration
+  - Replace value
 
 3. fetch
 
