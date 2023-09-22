@@ -25,7 +25,7 @@ Then, write the code on implement.py
 ### Import module
 
 ``` python
-from model import Model
+from model import Model, Field
 ```
 
 ### Use case
