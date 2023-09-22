@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import csv
 
-from pandas_reader.fixtures.fakes import *
+from pandas_reader.fixtures.fakes import table, in_mem_csv
 from pandas_reader.setup import config
 
 test_file = os.path.join(config.PACKAGE_DIR, 'fixtures/test.csv')

@@ -58,7 +58,7 @@ class ModelTests(unittest.TestCase):
         dummy = _Dummy()
         is_valid = True
         for name in dummy.get_colnames():
-            if not name in ["col1", "col2", "col3"]:
+            if name not in ["col1", "col2", "col3"]:
                 is_valid = False
                 break
 
@@ -78,7 +78,7 @@ class ModelTests(unittest.TestCase):
         columns = ["col2", "col3", "col4"]
         is_valid = True
         for name in dummy.get_colnames():
-            if not name in columns:
+            if name not in columns:
                 is_valid = False
                 break
         
