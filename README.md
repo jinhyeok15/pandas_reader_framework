@@ -141,15 +141,11 @@ the keyword argument of _get_dataframe function is allied to pandas.
 
 There is a bunch of steps to pre-processing DataFrame data structure
 
-- 1. Setup
-
-  - Remove columns that is not matched
-  - Replace column name
-  - Add index if model has index_field
-
-- 2. Iteration
-  - Replace value
-  - Filter rows
+- Remove columns that is not matched
+- Replace column name
+- Add index if model has index_field
+- Replace value
+- Filter rows
 
 3. fetch
 
