@@ -51,7 +51,7 @@ Register Model instance and filename in configs.py
 from implement import Student
 
 MODEL_INSTANCE = Student()
-FILNAME = "students.csv"
+FILENAME = "students.csv"
 ```
 
 ### Run script
