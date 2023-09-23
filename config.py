@@ -1,4 +1,4 @@
-from snapshot import Major
+# from snapshot import *
 
-MODEL_INSTANCE = Major()
-FILENAME = "univ_subject.csv"
+MODEL_INSTANCE = None
+FILENAME = None
