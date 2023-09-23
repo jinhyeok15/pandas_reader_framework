@@ -54,5 +54,5 @@ class Major(Model):
     std_mclsf_name = Field("표준분류중계열")
     std_sclsf_name = Field("표준분류소계열")
     _specification = Field("대학구분", filter=lambda x: x == "대학")
-    investigation_year = Field("조사년도")
+    investigation_year = Field("조사년도", change=lambda x: str(x))
     status = Field("학과상태", change=change_status)

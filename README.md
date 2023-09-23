@@ -21,7 +21,7 @@ You just need to declare Field in the Model class, and get the result by executi
 
 Setup data file which is located at './sources/'
 
-Then, write the code on implement.py
+Then, write the code on **snapshot.py**
 
 ### Import module
 
