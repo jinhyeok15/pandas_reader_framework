@@ -52,6 +52,12 @@ from implement import Student
 
 MODEL_INSTANCE = Student()
 FILENAME = "students.csv"
+
+FILETYPE = 'csv'
+SOURCE_PATH = 'sources'
+PANDAS_READ_OPTIONS = {
+    'encoding': "cp949"
+}
 ```
 
 ### Run script
@@ -150,3 +156,44 @@ There is a bunch of steps to pre-processing DataFrame data structure
 3. fetch
 
 fetch function is used for main.py. It can access Manager instance, and get pre-processed dataframe data structure
+
+### Config
+
+The config file is what you setting on your file source, file name, or your file types.
+
+#### Requirements
+
+The requirement settings on config.py is like below
+
+``` python
+MODEL_INSTANCE = None
+FILENAME = None
+```
+
+[The reference is here](#guide)
+
+#### Default
+
+The default settings on config.py is like below
+
+``` python
+FILETYPE = 'csv'
+SOURCE_PATH = 'sources'
+PANDAS_READ_OPTIONS = {}
+```
+
+1. FILETYPE
+
+Here is the enumerations of file type that provide you to read.
+
+- csv
+- excel
+- json
+
+2. SOURCE_PATH
+
+On project root generated file should save on the source path directory. Default path is 'sources'
+
+3. PANDAS_READ_OPTIONS
+
+You can select keyword argument options within [pandas io API](https://pandas.pydata.org/docs/reference/io.html)

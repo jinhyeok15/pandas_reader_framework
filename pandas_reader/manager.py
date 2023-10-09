@@ -7,32 +7,30 @@ from pandas_reader.model import Model
 from pandas_reader.setup import config
 
 
-def _get_dataframe(filename: str, *,
-                   file_type="csv",
-                   source_path="sources",
-                   encoding="cp949") -> Optional[pd.DataFrame]:
+def _get_dataframe(filename: str) -> Optional[pd.DataFrame]:
     """
     Pre-precessing from the ./sources.
 
     If you want to change default case of type, you can try it as you can.
 
-    Pandas provides you to choice below
+    This framework provides you to choice below
     - csv
-    - sql
     - excel
     - json
-    - html
-    ...
     """
+    file_type = config.FILETYPE
+    source_path = config.SOURCE_PATH
+
     path = os.path.join(config.BASE_DIR, source_path, filename)
 
     if file_type == "csv":
-        df = None
-        try:
-            df = pd.read_csv(path)
-        except UnicodeDecodeError:
-            df = pd.read_csv(path, encoding=encoding)
-        
+        df = pd.read_csv(path, **config.PANDAS_READ_OPTIONS)
+        return df
+    if file_type == "excel":
+        df = pd.read_excel(path, engine='openpyxl', **config.PANDAS_READ_OPTIONS)
+        return df
+    if file_type == "json":
+        df = pd.read_json(path, **config.PANDAS_READ_OPTIONS)
         return df
 
 
